@@ -3,13 +3,19 @@ import './app.css';
 import Habits from './components/habits';
 import Navbar from './components/navbar';
 
-class app extends Component {
+class App extends Component {
   state = {
     habits: [
       { id: 1, name: 'Reading', count: 0 },
       { id: 2, name: 'Running', count: 0 },
       { id: 3, name: 'Coding', count: 0 },
     ],
+  };
+
+  handleAdd = (habit) => {
+    const habits = [...this.state.habits];
+    habits.push(habit);
+    this.setState({ habits });
   };
 
   handleIncrement = (habit) => {
@@ -32,6 +38,14 @@ class app extends Component {
     this.setState({ habits });
   };
 
+  handleReset = () => {
+    const habits = this.state.habits;
+    habits.forEach((habit) => {
+      habit.count = 0;
+    });
+    this.setState({ habits });
+  };
+
   render() {
     return (
       <>
@@ -42,13 +56,15 @@ class app extends Component {
         />
         <Habits
           habits={this.state.habits}
+          onAdd={this.handleAdd}
           onIncrement={this.handleIncrement}
           onDecrement={this.handleDecrement}
           onDelete={this.handleDelete}
+          onReset={this.handleReset}
         />
       </>
     );
   }
 }
 
-export default app;
+export default App;
