@@ -7,7 +7,7 @@ class Habits extends Component {
   handleAdd = (event) => {
     event.preventDefault();
     const name = this.inputRef.current.value;
-    const habit = { id: 0, name: name, count: 0 };
+    const habit = { id: Date.now(), name: name, count: 0 };
     this.props.onAdd(habit);
     this.inputRef.current.value = '';
   };
